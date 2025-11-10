@@ -1,5 +1,11 @@
+import Banner from "../comps/Banner";
+import FeaturedFood from "../comps/FeaturedFood";
+
 export default function Home(){
     return(
-        <h1>HOme</h1>
+        <>
+            <Banner />
+            <FeaturedFood />
+        </>
     );
 }

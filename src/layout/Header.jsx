@@ -33,8 +33,8 @@ export default function Header() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn">Login</button>
-                    <div className="dropdown dropdown-end">
+                    <Link to='/login' className="btn btn-primary">Login</Link>
+                    {/* <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
@@ -50,7 +50,7 @@ export default function Header() {
                             <li> <Link to='/' className='text-sm'>My Food Requests</Link> </li>
                             <li> <button className='text-sm'>Logout</button> </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </nav>
         </header>

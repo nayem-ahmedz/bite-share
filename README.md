@@ -27,6 +27,7 @@ Responsive for mobile, tablet, laptop and desktop PC
 ## Used Tools and others
 - Google Fonts API : Inter font
 - React Router
+- FontAwsome Icons
 
 ## Project Timeline
 - created on 10 Nov 2025
