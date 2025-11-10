@@ -33,7 +33,7 @@ export default function Header() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login' className="btn btn-primary">Login</Link>
+                    <Link to='/auth/login' className="btn btn-primary text-base">Login</Link>
                     {/* <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">

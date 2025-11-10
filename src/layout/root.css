@@ -1,13 +1,20 @@
+body{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+}
+/* flex root, and need for main flex grow works */
 #root{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-.containerr{
-    max-width: 1440px;
-    margin: auto;
-}
+/* ensuring main section take all the available space after header and footer */
 main{
     width: 100%;
     flex-grow: 1;
+}
+/* custom container, for large screen */
+.containerr{
+    max-width: 1440px;
+    margin: auto;
 }

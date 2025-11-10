@@ -18,8 +18,8 @@ export default function Footer() {
                     <nav className="grid grid-flow-col gap-4">
                         <Link to='/' className="link link-hover text-base">Home</Link>
                         <Link to='/available-foods' className="link link-hover text-base">Available Foods</Link>
-                        <Link to='/login' className="link link-hover text-base">Login</Link>
-                        <Link to='/register' className="link link-hover text-base">Register</Link>
+                        <Link to='/auth/login' className="link link-hover text-base">Login</Link>
+                        <Link to='/auth/register' className="link link-hover text-base">Register</Link>
                     </nav>
                     <h6 className="footer-title mt-4">Social</h6>
                     <div className="grid grid-flow-col gap-5">

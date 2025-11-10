@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import FoodCard from "./FoodCard";
 
 export default function FeaturedFood(){
@@ -13,7 +14,7 @@ export default function FeaturedFood(){
                 <FoodCard />
             </section>
             <p className="text-center mt-6 md:mt-10">
-                <button className="btn btn-primary">Show All Food</button>
+                <Link to='/available-foods' className="btn btn-primary">Show All Food</Link>
             </p>
         </article>
     );
