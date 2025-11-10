@@ -25,12 +25,8 @@ Complete Web Development by Programming Hero | Batch 12
 Responsive for mobile, tablet, laptop and desktop PC
 
 ## Used Tools and others
-+ Google Fonts API : Inter font
+- Google Fonts API : Inter font
 - React Router
-- React Toastify
-- Sweetalert2
-- React Icons
-- Motion
 
 ## Project Timeline
 - created on 10 Nov 2025
@@ -38,6 +34,6 @@ Responsive for mobile, tablet, laptop and desktop PC
 - last updated on -- 2025
 
 ## live link
-coming soon
+[BiteShare](https://bite-sharee.vercel.app/)
 
 Feel free to contact for any query!
