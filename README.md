@@ -28,6 +28,8 @@ Responsive for mobile, tablet, laptop and desktop PC
 - Google Fonts API : Inter font
 - React Router
 - FontAwsome Icons
+- React Toastify
+- SweetAlert 2
 
 ## Project Timeline
 - created on 10 Nov 2025
