@@ -3,6 +3,7 @@ import Root from "../layout/Root";
 import Home from "../pages/Home";
 import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
+import FoodDetails from "../pages/FoodDetails";
 const AvailableFoods = lazy(() => import('../pages/AvailableFoods'));
 const NoPage = lazy(() => import('../pages/NoPage'));
 const AuthLayout = lazy(() => import('../pages/AuthLayout'));
@@ -19,10 +20,6 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> },
             {
-                path: '/available-foods',
-                element: <AvailableFoods />
-            },
-            {
                 path: '/auth',
                 element: <AuthLayout />,
                 children: [
@@ -30,6 +27,16 @@ export const router = createBrowserRouter([
                     { path: 'login', element: <Login /> },
                     { path: 'register', element: <Register /> },
                 ]
+            },
+            {
+                path: '/available-foods',
+                loader: () => fetch('http://localhost:3000/foods'),
+                element: <AvailableFoods />
+            },
+            {
+                path: '/foods/:id',
+                loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+                element: <PrivateRoute> <FoodDetails /> </PrivateRoute>
             },
             {
                 path: '/add-food',

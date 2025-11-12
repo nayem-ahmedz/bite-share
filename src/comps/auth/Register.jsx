@@ -57,11 +57,6 @@ export default function Register() {
             })
             .catch(error => setError(error.message));
     }
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/users')
-    //       .then(res => res.json())
-    //       .then(data => console.log(data));
-    // }, []);
     // save the user to database
     const saveToDb = (userInfo) => {
         userInfo.getIdToken()
