@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
@@ -34,6 +34,7 @@ export default function Register() {
                     .then(() => {
                         toast.success('Account created Succesfully!');
                         navigate('/');
+                        saveToDb(userCredential.user);
                     })
                     .catch(error => setError(error.message));
             })
@@ -52,8 +53,37 @@ export default function Register() {
                 const firstName = result.user.displayName.split(' ')[0];
                 toast.success(`Welcome ${firstName}`);
                 navigate('/');
+                saveToDb(result.user);
             })
             .catch(error => setError(error.message));
+    }
+    // useEffect(() => {
+    //     fetch('http://localhost:3000/users')
+    //       .then(res => res.json())
+    //       .then(data => console.log(data));
+    // }, []);
+    // save the user to database
+    const saveToDb = (userInfo) => {
+        userInfo.getIdToken()
+            .then(idToken => {
+                const user = {
+                    name: userInfo.displayName,
+                    email: userInfo.email,
+                    photoURL: userInfo.photoURL,
+                    authUserID: userInfo.uid
+                }
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${idToken}`
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.log(error));
+            });
     }
     return (
         <section className="flex justify-center w-full px-6">
