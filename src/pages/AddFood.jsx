@@ -59,7 +59,7 @@ export default function AddFood() {
             };
             // send food data to backend
             const idToken = await currentUser.getIdToken();
-            const response = await fetch('http://localhost:3000/foods', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}foods`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

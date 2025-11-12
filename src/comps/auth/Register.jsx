@@ -67,7 +67,7 @@ export default function Register() {
                     photoURL: userInfo.photoURL,
                     authUserID: userInfo.uid
                 }
-                fetch('http://localhost:3000/users', {
+                fetch(`${import.meta.env.VITE_BACKEND_URL}users`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",

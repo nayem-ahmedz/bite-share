@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
 import FoodDetails from "../pages/FoodDetails";
+import ErrorPage from "../utils/ErrorPage";
 const AvailableFoods = lazy(() => import('../pages/AvailableFoods'));
 const NoPage = lazy(() => import('../pages/NoPage'));
 const AuthLayout = lazy(() => import('../pages/AuthLayout'));
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Root />,
         children: [
-            { index: true, element: <Home /> },
+            { index: true, element: <Home />, errorElement: <ErrorPage /> },
             {
                 path: '/auth',
                 element: <AuthLayout />,
@@ -30,12 +31,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/available-foods',
-                loader: () => fetch('http://localhost:3000/foods'),
+                loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}foods`),
                 element: <AvailableFoods />
             },
             {
                 path: '/foods/:id',
-                loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}${params.id}`),
                 element: <PrivateRoute> <FoodDetails /> </PrivateRoute>
             },
             {
