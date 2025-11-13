@@ -30,6 +30,7 @@ Responsive for mobile, tablet, laptop and desktop PC
 - FontAwsome Icons
 - React Toastify
 - SweetAlert 2
+- Motion
 
 ## Project Timeline
 - created on 10 Nov 2025
