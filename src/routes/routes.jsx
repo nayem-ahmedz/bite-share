@@ -5,6 +5,7 @@ import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
 import FoodDetails from "../pages/FoodDetails";
 import ErrorPage from "../utils/ErrorPage";
+import UpdateFood from "../pages/UpdateFood";
 const AvailableFoods = lazy(() => import('../pages/AvailableFoods'));
 const NoPage = lazy(() => import('../pages/NoPage'));
 const AuthLayout = lazy(() => import('../pages/AuthLayout'));
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
             {
                 path: '/food-request',
                 element: <PrivateRoute> <MyFoodRequests /> </PrivateRoute>
+            },
+            {
+                path: '/update-food/:id',
+                element: <PrivateRoute> <UpdateFood /> </PrivateRoute>
             },
             { path: '/*', element: <NoPage /> }
         ]
