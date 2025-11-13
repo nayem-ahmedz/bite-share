@@ -11,6 +11,9 @@ export default function AvailableFoods() {
                     foods.map(food => <FoodCard key={food._id} food={food} />)
                 }
             </section>
+            {
+                foods.length === 0 && <h3 className="text-center text-xl sm:text-2xl my-10">No foods to show</h3>
+            }
         </section>
     );
 }

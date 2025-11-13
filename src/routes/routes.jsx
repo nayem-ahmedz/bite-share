@@ -33,12 +33,14 @@ export const router = createBrowserRouter([
             {
                 path: '/available-foods',
                 loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}foods`),
-                element: <AvailableFoods />
+                element: <AvailableFoods />,
+                errorElement: <ErrorPage />
             },
             {
                 path: '/foods/:id',
                 loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${params.id}`),
-                element: <PrivateRoute> <FoodDetails /> </PrivateRoute>
+                element: <PrivateRoute> <FoodDetails /> </PrivateRoute>,
+                errorElement: <ErrorPage />
             },
             {
                 path: '/add-food',
