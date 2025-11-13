@@ -3,9 +3,6 @@ import Root from "../layout/Root";
 import Home from "../pages/Home";
 import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
-import FoodDetails from "../pages/FoodDetails";
-import ErrorPage from "../utils/ErrorPage";
-import UpdateFood from "../pages/UpdateFood";
 const AvailableFoods = lazy(() => import('../pages/AvailableFoods'));
 const NoPage = lazy(() => import('../pages/NoPage'));
 const AuthLayout = lazy(() => import('../pages/AuthLayout'));
@@ -14,6 +11,9 @@ const Register = lazy(() => import('../comps/auth/Register'));
 const AddFood = lazy(() => import('../pages/AddFood'));
 const ManageMyFoods = lazy(() => import('../pages/ManageMyFoods'));
 const MyFoodRequests = lazy(() => import('../pages/MyFoodRequests'));
+const FoodDetails = lazy(() => import('../pages/FoodDetails'));
+const ErrorPage = lazy(() => import('../utils/ErrorPage'));
+const UpdateFood = lazy(() => import('../pages/UpdateFood'));
 
 export const router = createBrowserRouter([
     {

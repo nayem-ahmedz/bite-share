@@ -7,20 +7,20 @@ export default function ManageMyFoods() {
     const { currentUser } = useContext(AuthContext);
     const [foods, setFoods] = useState([]);
     useEffect(() => {
-        const unsubs = async () => {
-            const idToken = await currentUser.getIdToken();
-            // console.log(idToken)
-            fetch(`${import.meta.env.VITE_BACKEND_URL}my-food?email=${currentUser.email}`, {
-                headers: {
-                    'Authorization': `Bearer ${idToken}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => setFoods(data))
-                .catch(error => console.log(error));
-        }
-        return () => unsubs();
-    }, []);
+        const fetchFoods = async () => {
+            try {
+                const idToken = await currentUser.getIdToken();
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}my-food?email=${currentUser.email}`, {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                const data = await res.json();
+                setFoods(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        if (currentUser) fetchFoods();
+    }, [currentUser]);
     const handleDelete = async (id) => {
         const idToken = await currentUser.getIdToken();
         Swal.fire({
