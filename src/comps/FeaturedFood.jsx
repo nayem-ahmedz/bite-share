@@ -1,9 +1,27 @@
 import { Link } from "react-router";
 import FoodCard from "./FoodCard";
-import { use } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../utils/Loading";
 
-export default function FeaturedFood({ foodPromise }) {
-    const featuredFoods = use(foodPromise);
+export default function FeaturedFood() {
+    const [featuredFoods, setFeaturedFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const fetchFeaturedFoods = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}featured-foods`);
+                const data = await res.json();
+                setFeaturedFoods(data);
+            } catch (err) {
+                console.error("Error fetching featured foods:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFeaturedFoods();
+    }, []);
+    if (loading) return <Loading />;
     return (
         <article className="p-4 my-6 md:my-10">
             <h2 className="text-3xl text-center font-bold mb-4">Featured Food</h2>
