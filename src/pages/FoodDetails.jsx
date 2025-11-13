@@ -7,16 +7,13 @@ export default function FoodDetails() {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Food Details</h2>
 
             <div className="card lg:card-side bg-base-100 shadow-xl mx-auto max-w-4xl">
-                {/* Food Image */}
-                <figure className="lg:w-1/2">
+                <figure className="lg:w-1/2 aspect-3/2">
                     <img
                         src={food.imageUrl}
                         alt={food.foodName}
                         className="w-full h-full object-cover rounded-lg"
                     />
                 </figure>
-
-                {/* Food Info */}
                 <div className="card-body lg:w-1/2 lg:pl-10">
                     <h3 className="card-title text-2xl font-bold">{food.foodName}</h3>
                     <p className="text-gray-600 mb-2"><strong>Status:</strong> <span className={food.foodStatus === 'Available' ? 'text-green-600' : 'text-red-600'}>{food.foodStatus}</span></p>

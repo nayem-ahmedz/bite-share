@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import HeroImg from '../assets/hero-2.png';
+import HeroImg from '../assets/hero-2.webp';
 
 export default function Auth() {
     return (

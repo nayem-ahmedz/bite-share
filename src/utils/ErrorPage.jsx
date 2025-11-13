@@ -1,4 +1,5 @@
 import Logo from '../assets/logo2-nobg.png';
+import BG from '../assets/error-404.webp';
 
 export default function ErrorPage(){
     console.log('loading...');

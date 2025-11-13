@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import Loading from "../utils/Loading";
 
 export default function ManageMyFoods() {
     const { currentUser } = useContext(AuthContext);
     const [foods, setFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchFoods = async () => {
+            if (!currentUser) return;
             try {
                 const idToken = await currentUser.getIdToken();
                 const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}my-food?email=${currentUser.email}`, {
@@ -17,9 +20,11 @@ export default function ManageMyFoods() {
                 setFoods(data);
             } catch (err) {
                 console.log(err);
+            } finally {
+                setLoading(false); // NEW
             }
         };
-        if (currentUser) fetchFoods();
+        fetchFoods();
     }, [currentUser]);
     const handleDelete = async (id) => {
         const idToken = await currentUser.getIdToken();
@@ -66,6 +71,7 @@ export default function ManageMyFoods() {
             }
         });
     }
+    if(loading) return <Loading />
     return (
         <section className="p-4">
             <ul className="list bg-base-100 rounded-box shadow-md max-w-4xl mx-auto my-10">
@@ -94,7 +100,9 @@ export default function ManageMyFoods() {
                     </li>)
                 }
                 {
-                    foods.length === 0 && <li className="list-row text-base py-6 text-red-400">No Foods Donated Yet!</li>
+                    !loading && foods.length === 0 && (
+                        <li className="list-row text-base py-6 text-red-400">No Foods Donated Yet!</li>
+                    )
                 }
             </ul>
         </section>

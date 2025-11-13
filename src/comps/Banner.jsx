@@ -1,4 +1,5 @@
-import HeroImg from '../assets/hero-2.png';
+import { Link } from 'react-router';
+import HeroImg from '../assets/hero-2.webp';
 export default function Banner() {
     return (
         <section className="hero min-h-[80vh] bg-position-[80%] md:bg-center" style={{ backgroundImage: `url('${HeroImg}')`,}}>
@@ -9,7 +10,7 @@ export default function Banner() {
                     <p className="mb-5">
                         Tired of eating? Don't waste your food. Share it with someone and share love. Hungry? Dont worry! Check out the donated food items and choose one and get it in your door by our community driven food sharing platform
                     </p>
-                    <button className="btn btn-primary">View All Foods</button>
+                    <Link to='/available-foods' className="btn btn-primary">View All Foods</Link>
                 </div>
             </div>
         </section>
