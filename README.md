@@ -20,6 +20,7 @@ Complete Web Development by Programming Hero | Batch 12
 ### Backend
 - Firebase Auth
 - Node JS
+- Express Js
 - MongoDb
 
 Responsive for mobile, tablet, laptop and desktop PC
@@ -34,8 +35,8 @@ Responsive for mobile, tablet, laptop and desktop PC
 
 ## Project Timeline
 - created on 10 Nov 2025
-- completed on -- 2025
-- last updated on -- 2025
+- completed on 13 Nov 2025
+- last updated on 13 Nov 2025
 
 ## live link
 [BiteShare](https://bite-sharee.vercel.app/)
