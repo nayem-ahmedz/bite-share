@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/foods/:id',
-                loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}${params.id}`),
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${params.id}`),
                 element: <PrivateRoute> <FoodDetails /> </PrivateRoute>
             },
             {
