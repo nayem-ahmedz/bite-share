@@ -2,16 +2,36 @@
 Share your vite with others
 
 ## Overview
-**Bite Share** is a web application designed to let users share and explore their favorite food or "vite" experiences. Built with modern web technologies, it features authentication, responsive design, and smooth UI interactions.
+**Bite Share** is a MERN stack web application that allows users to share and explore food items (“bites”). Users can add foods, request foods, manage their listed items, and interact through a modern, responsive interface.
 
 ![Bite Share Screenshot](./public/screenshots/homepage.webp)
 
 ## Features
-- User authentication via Firebase Auth
-- Share your favorite food experiences ("vite") with others
-- Explore vite shared by other users
-- Responsive design for mobile, tablet, laptop, and desktop
-- Smooth UI interactions and notifications
+
+### 🔐 Authentication
+- Secure user login using Email & Password
+- Google Sign-In support
+- Protected routes based on user authentication
+
+### 🍽️ Food Browsing
+- Home page shows Top Available Foods sorted by quantity
+- View All available Foods
+- Detailed Food Information Page for every item
+
+### ➕ Add & Manage Foods
+- Users can add new food items
+- Users can update or delete foods they have posted
+- Check all foods added by the logged-in user
+
+### 📩 Food Requests
+- Users can request any available food item
+- Food owners can view incoming requests
+- Owners can approve or delete requests
+
+### 📱 Responsive & Smooth UI
+- Fully responsive for mobile, tablet, laptop, and desktop
+- Clean and modern UI
+- Smooth interactions + toast notifications
 
 ## Technologies
 ### Frontend
