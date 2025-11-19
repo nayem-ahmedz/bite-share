@@ -44,7 +44,7 @@ Responsive for mobile, tablet, laptop and desktop PC
 ## Installation / Running Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/bite-share.git
+   git clone https://github.com/nayem-ahmedz/bite-share.git
    ```
 2. Navigate to the project folder:
    ```bash
