@@ -29,7 +29,13 @@ export default function FoodCard({ food }) {
                 <h3 className="text-xl">Donated By {food.donator}</h3>
                 <p className="text-base">Can serve up to {food.foodQuantity} people</p>
                 <p className="text-base">Pickup Location: {food.pickupLocation}</p>
-                <p className="text-base">Expire Date: {food.expireDate}</p>
+                <p className="text-base">Expire Date: {
+                    new Date(food.expireDate).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                    })
+                } </p>
                 <div className="card-actions justify-end">
                     <Link
                         to={`/foods/${food._id}`}

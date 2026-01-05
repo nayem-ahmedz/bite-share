@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 export default function AddFood() {
     const { currentUser } = useAuth();
     const [active, setActive] = useState(false);
     const [error, setError] = useState('');
-    // console.log(currentUser);
+    const axiosSecure = useAxiosSecure();
     async function handleSubmit(e) {
         e.preventDefault();
         setError('');
@@ -59,16 +60,10 @@ export default function AddFood() {
             };
             // send food data to backend
             const idToken = await currentUser.getIdToken();
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}foods`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${idToken}`
-                },
-                body: JSON.stringify(foodData)
-            });
-            const result = await response.json();
-            if (!response.ok) {
+            const response = await axiosSecure.post('/api/food', foodData);
+            const result = await response.data;
+            console.log(result);
+            if (!response.data.ok) {
                 setError(result.message);
                 return;
             }

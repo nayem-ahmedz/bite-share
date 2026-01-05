@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
 export default function FoodDetails() {
-    const food = useLoaderData();
+    const { food } = useLoaderData();
     const { currentUser } = useContext(AuthContext); // get logged-in user
     const [modalOpen, setModalOpen] = useState(false);
     const [location, setLocation] = useState('');
@@ -71,7 +71,13 @@ export default function FoodDetails() {
                     <p className="text-gray-600 mb-2"><strong>Status:</strong> <span className={food.foodStatus === 'Available' ? 'text-green-600' : 'text-red-600'}>{food.foodStatus}</span></p>
                     <p className="text-gray-700 mb-2"><strong>Quantity:</strong> Serves {food.foodQuantity} {food.foodQuantity > 1 ? 'people' : 'person'}</p>
                     <p className="text-gray-700 mb-2"><strong>Pickup Location:</strong> {food.pickupLocation}</p>
-                    <p className="text-gray-700 mb-2"><strong>Expire Date:</strong> {new Date(food.expireDate).toLocaleDateString()}</p>
+                    <p className="text-gray-700 mb-2"><strong>Expire Date:</strong> {
+                        new Date(food.expireDate).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                        })
+                    }</p>
                     <p className="text-gray-700 mb-4"><strong>Notes:</strong> {food.notes}</p>
 
                     <div className="flex items-center mt-4">

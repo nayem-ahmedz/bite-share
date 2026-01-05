@@ -3,25 +3,24 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../utils/Loading";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 export default function ManageMyFoods() {
     const { currentUser } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchFoods = async () => {
             if (!currentUser) return;
             try {
-                const idToken = await currentUser.getIdToken();
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}my-food?email=${currentUser.email}`, {
-                    headers: { 'Authorization': `Bearer ${idToken}` }
-                });
-                const data = await res.json();
-                setFoods(data);
+                const res = await axiosSecure.get(`/api/food/my`)
+                const data = res.data;
+                setFoods(data.foods);
             } catch (err) {
                 console.log(err);
             } finally {
-                setLoading(false); // NEW
+                setLoading(false);
             }
         };
         fetchFoods();

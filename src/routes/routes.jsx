@@ -37,12 +37,6 @@ export const router = createBrowserRouter([
                 ]
             },
             {
-                path: '/available-foods',
-                loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}foods`),
-                element: <AvailableFoods />,
-                errorElement: <ErrorPage />
-            },
-            {
                 path: '/about',
                 element: <About />
             },
@@ -51,8 +45,14 @@ export const router = createBrowserRouter([
                 element: <Contact />
             },
             {
+                path: '/available-foods',
+                loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/api/food`),
+                element: <AvailableFoods />,
+                errorElement: <ErrorPage />
+            },
+            {
                 path: '/foods/:id',
-                loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${params.id}`),
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}/api/food/${params.id}`),
                 element: <FoodDetails />,
                 errorElement: <ErrorPage />
             },

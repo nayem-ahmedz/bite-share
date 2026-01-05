@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import FoodCard from "./FoodCard";
+import FoodCard from "./food/FoodCard";
 import { useEffect, useState } from "react";
 import Loading from "../utils/Loading";
 
@@ -9,16 +9,15 @@ export default function FeaturedFood() {
     useEffect(() => {
         const fetchFeaturedFoods = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}featured-foods`);
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/food/featured`);
                 const data = await res.json();
-                setFeaturedFoods(data);
+                setFeaturedFoods(data.foods);
             } catch (err) {
                 console.error("Error fetching featured foods:", err);
             } finally {
                 setLoading(false);
             }
         };
-
         fetchFeaturedFoods();
     }, []);
     if (loading) return <Loading />;
