@@ -10,6 +10,11 @@ export default function Header() {
     const navLinks = <>
         <li> <NavLink to='/' className='text-base'>Home</NavLink> </li>
         <li> <NavLink to='/available-foods' className='text-base'>Available Foods</NavLink> </li>
+        <li> <NavLink to='/about' className='text-base'>About Us</NavLink> </li>
+        <li> <NavLink to='/contact' className='text-base'>Contact</NavLink> </li>
+        {
+            currentUser && <li> <NavLink to='/dashboard/home' className='text-base'>Dashboard</NavLink> </li>
+        }
     </>;
     const handleLogout = () => {
         Swal.fire({
@@ -41,7 +46,7 @@ export default function Header() {
         });
     }
     return (
-        <header className="bg-base-100 shadow-sm">
+        <header className="bg-base-100 shadow-sm sticky top-0 z-10">
             <nav className="navbar containerr py-0">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -78,9 +83,8 @@ export default function Header() {
                             <ul
                                 tabIndex="-1"
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                <li> <Link to='/add-food' className='text-sm'>Add Food</Link> </li>
-                                <li> <Link to='/my-foods' className='text-sm'>Manage My Foods</Link> </li>
-                                <li> <Link to='/food-request' className='text-sm'>My Food Requests</Link> </li>
+                                <li> <Link to='/dashboard/my-profile' className='text-sm'>My Profile</Link> </li>
+                                <li> <Link to='/dashboard/home' className='text-sm'>Dashboard</Link> </li>
                                 <li> <button className='text-sm' onClick={handleLogout}>Logout</button> </li>
                             </ul>
                         </div> : <Link to='/auth/login' className="btn btn-primary text-base">Login</Link>

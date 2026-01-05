@@ -14,6 +14,8 @@ const MyFoodRequests = lazy(() => import('../pages/MyFoodRequests'));
 const FoodDetails = lazy(() => import('../pages/FoodDetails'));
 const ErrorPage = lazy(() => import('../utils/ErrorPage'));
 const UpdateFood = lazy(() => import('../pages/UpdateFood'));
+const About = lazy(() => import('../pages/about/About'));
+const Contact = lazy(() => import('../pages/contact/Contact'));
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
                 loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}foods`),
                 element: <AvailableFoods />,
                 errorElement: <ErrorPage />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/contact',
+                element: <Contact />
             },
             {
                 path: '/foods/:id',
