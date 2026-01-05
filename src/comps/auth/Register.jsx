@@ -1,14 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../context/AuthContext";
 import { motion } from "motion/react";
+import useAuth from "../../hooks/useAuth";
+import GoogleLogin from "./GoogleLogin";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 export default function Register() {
     const [error, setError] = useState('');
-    const { createUser, updateUserProfile, continueWithGoogle } = useContext(AuthContext);
+    const [ loading, setLoading ] = useState(false);
+    const { createUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
     function handleSubmit(e) {
+        setLoading(true);
         e.preventDefault();
         setError('');
         const displayName = e.target.name.value.trim();
@@ -27,17 +32,29 @@ export default function Register() {
             setError('Password needs a lowercase letter');
             return;
         }
+        // user info to send to DB
+        const userData = {
+            name: displayName, email, photoURL
+        };
         // creating a new user using email and password
         createUser(email, password)
             .then(userCredential => {
                 e.target.reset();
                 updateUserProfile(userCredential.user, { displayName, photoURL })
                     .then(() => {
-                        toast.success('Account created Succesfully!');
-                        navigate('/');
-                        saveToDb(userCredential.user);
+                        axiosSecure.post('/api/user', userData)
+                          .then(res => {
+                            console.log(res);
+                            toast.success('Account created Succesfully!');
+                            navigate('/');
+                          });
                     })
-                    .catch(error => setError(error.message));
+                    .catch(error => {
+                        setError(error.message)
+                    })
+                    .finally(() => {
+                        setLoading(false);
+                    });
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -45,40 +62,7 @@ export default function Register() {
                 } else {
                     setError(error.code);
                 }
-            });
-    }
-    // continue with google
-    const googleAuth = () => {
-        continueWithGoogle()
-            .then(result => {
-                const firstName = result.user.displayName.split(' ')[0];
-                toast.success(`Welcome ${firstName}`);
-                navigate('/');
-                saveToDb(result.user);
-            })
-            .catch(error => setError(error.message));
-    }
-    // save the user to database
-    const saveToDb = (userInfo) => {
-        userInfo.getIdToken()
-            .then(idToken => {
-                const user = {
-                    name: userInfo.displayName,
-                    email: userInfo.email,
-                    photoURL: userInfo.photoURL,
-                    authUserID: userInfo.uid
-                }
-                fetch(`${import.meta.env.VITE_BACKEND_URL}users`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${idToken}`
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => console.log(data))
-                    .catch(error => console.log(error));
+                setLoading(false);
             });
     }
     return (
@@ -103,14 +87,11 @@ export default function Register() {
                             <label htmlFor="password" className="label mt-1">Password</label>
                             <input type="password" id="password" name="password" className="input w-full" placeholder="Password" required />
                             {error && <p className="text-red-500 mt-2 text-base text-center font-medium">{error}</p>}
-                            <button type="submit" className="btn btn-neutral mt-4">Register</button>
+                            <button type="submit" className="btn btn-neutral mt-4" disabled={loading}>Register</button>
                         </fieldset>
                     </form>
                     <p className="text-center text-base">OR</p>
-                    <button onClick={googleAuth} className="btn bg-white text-black border-[#e5e5e5]">
-                        {/* Google SVG */}
-                        Continue with Google
-                    </button>
+                    <GoogleLogin />
                     <p className="mt-1">
                         Already have an account? <Link to='/auth/login' className="underline">Login</Link>
                     </p>

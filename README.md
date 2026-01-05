@@ -79,6 +79,19 @@ Responsive for mobile, tablet, laptop and desktop PC
    npm run dev
    ```
 
+## setup env variables
+- Create a .env.local and paste
+```bash
+VITE_apiKey=your_firebase_keys
+VITE_authDomain=your_firebase_keys
+VITE_projectId=your_firebase_keys
+VITE_storageBucket=your_firebase_keys
+VITE_messagingSenderId=your_firebase_keys
+VITE_appId=your_firebase_keys
+VITE_BACKEND_URL=your_backend_url
+VITE_imagebbAPI=your_imagebb_api_key
+```
+
 ## live link
 [BiteShare](https://bite-sharee.vercel.app/)
 

@@ -3,6 +3,7 @@ import Logo from '../assets/logo2-nobg.png';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import Swal from 'sweetalert2';
+import ThemeToggler from '../utils/ThemeToggler';
 
 export default function Header() {
     const { currentUser, loading, logoutUser } = useContext(AuthContext);
@@ -65,7 +66,7 @@ export default function Header() {
                         }
                     </ul>
                 </div>
-                <div className="navbar-end">                    
+                <div className="navbar-end gap-2">                    
                     {
                         loading ? <span className="loading loading-dots loading-xl mr-5"></span> : currentUser ?
                         <div className="dropdown dropdown-end">
@@ -84,6 +85,7 @@ export default function Header() {
                             </ul>
                         </div> : <Link to='/auth/login' className="btn btn-primary text-base">Login</Link>
                     }
+                    <ThemeToggler />
                 </div>
             </nav>
         </header>
