@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 export default function AddFood() {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useAuth();
     const [active, setActive] = useState(false);
     const [error, setError] = useState('');
     // console.log(currentUser);

@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 export default function Banner() {
     return (
         <section
-            className="hero min-h-[80vh] bg-cover bg-no-repeat md:bg-center"
+            className="hero min-h-[70vh] bg-cover bg-no-repeat md:bg-center"
             style={{ backgroundImage: `url('${HeroImg}')` }}
         >
             <div className="hero-overlay bg-black/50"></div>

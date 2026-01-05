@@ -8,14 +8,18 @@ const NoPage = lazy(() => import('../pages/NoPage'));
 const AuthLayout = lazy(() => import('../pages/AuthLayout'));
 const Login = lazy(() => import('../comps/auth/Login'));
 const Register = lazy(() => import('../comps/auth/Register'));
-const AddFood = lazy(() => import('../pages/AddFood'));
-const ManageMyFoods = lazy(() => import('../pages/ManageMyFoods'));
-const MyFoodRequests = lazy(() => import('../pages/MyFoodRequests'));
 const FoodDetails = lazy(() => import('../pages/FoodDetails'));
 const ErrorPage = lazy(() => import('../utils/ErrorPage'));
-const UpdateFood = lazy(() => import('../pages/UpdateFood'));
 const About = lazy(() => import('../pages/about/About'));
 const Contact = lazy(() => import('../pages/contact/Contact'));
+
+// dashboard
+const Dashboard = lazy(() => import('../layout/Dashboard'));
+const DashboardHome = lazy(() => import('../pages/dashboard/Home'));
+const AddFood = lazy(() => import('../pages/dashboard/foods/AddFood'));
+const ManageFoods = lazy(() => import('../pages/dashboard/foods/ManageMyFoods'));
+const MyFoodRequest = lazy(() => import('../pages/dashboard/foods/MyFoodRequests'));
+const NoPageDashboards = lazy(() => import('../pages/dashboard/NoPage'));
 
 export const router = createBrowserRouter([
     {
@@ -49,26 +53,22 @@ export const router = createBrowserRouter([
             {
                 path: '/foods/:id',
                 loader: ({params}) => fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${params.id}`),
-                element: <PrivateRoute> <FoodDetails /> </PrivateRoute>,
+                element: <FoodDetails />,
                 errorElement: <ErrorPage />
             },
-            {
-                path: '/add-food',
-                element: <PrivateRoute> <AddFood /> </PrivateRoute>
-            },
-            {
-                path: '/my-foods',
-                element: <PrivateRoute> <ManageMyFoods /> </PrivateRoute>
-            },
-            {
-                path: '/food-request',
-                element: <PrivateRoute> <MyFoodRequests /> </PrivateRoute>
-            },
-            {
-                path: '/update-food/:id',
-                element: <PrivateRoute> <UpdateFood /> </PrivateRoute>
-            },
             { path: '/*', element: <NoPage /> }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute> <Dashboard /> </PrivateRoute>,
+        children: [
+            { index: true, element: <DashboardHome /> },
+            { path: 'home', element: <DashboardHome /> },
+            { path: 'add-food', element: <AddFood /> },
+            { path: 'manage-foods', element: <ManageFoods /> },
+            { path: 'my-request', element: <MyFoodRequest /> },
+            { path: '*', element: <NoPageDashboards /> }
         ]
     }
 ]);

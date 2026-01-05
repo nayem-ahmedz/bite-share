@@ -1,12 +1,11 @@
 import { Link, NavLink } from 'react-router';
 import Logo from '../assets/logo2-nobg.png';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import ThemeToggler from '../utils/ThemeToggler';
+import useAuth from '../hooks/useAuth';
 
 export default function Header() {
-    const { currentUser, loading, logoutUser } = useContext(AuthContext);
+    const { currentUser, loading, logoutUser } = useAuth();
     const navLinks = <>
         <li> <NavLink to='/' className='text-base'>Home</NavLink> </li>
         <li> <NavLink to='/available-foods' className='text-base'>Available Foods</NavLink> </li>

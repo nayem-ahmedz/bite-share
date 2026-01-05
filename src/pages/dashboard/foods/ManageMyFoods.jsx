@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
-import Loading from "../utils/Loading";
+import useAuth from "../../../hooks/useAuth";
+import Loading from "../../../utils/Loading";
 
 export default function ManageMyFoods() {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useAuth();
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
