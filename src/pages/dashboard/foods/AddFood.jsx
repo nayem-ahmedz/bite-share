@@ -59,10 +59,8 @@ export default function AddFood() {
                 foodStatus: 'Available'
             };
             // send food data to backend
-            const idToken = await currentUser.getIdToken();
             const response = await axiosSecure.post('/api/food', foodData);
             const result = await response.data;
-            console.log(result);
             if (!response.data.ok) {
                 setError(result.message);
                 return;

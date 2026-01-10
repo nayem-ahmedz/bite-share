@@ -4,7 +4,6 @@ import FoodCard from "../comps/food/FoodCard";
 export default function AvailableFoods() {
     const data = useLoaderData();
     const { foods } = data;
-    console.log(data);
     return (
         <section className="p-4 my-6 md:my-10">
             <h2 className="text-3xl text-center font-bold mb-4">All Available Foods</h2>

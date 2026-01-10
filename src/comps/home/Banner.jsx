@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import HeroImg from '../assets/hero-2.webp';
+import HeroImg from '../../assets/hero-2.webp';
 import { motion } from "motion/react"
 
 export default function Banner() {

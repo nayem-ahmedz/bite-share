@@ -59,7 +59,7 @@ Responsive for mobile, tablet, laptop and desktop PC
 ## Project Timeline
 - created on 10 Nov 2025
 - completed on 13 Nov 2025
-- last updated on 19 Nov 2025
+- last updated on 10 Jan 2025
 
 ## Installation / Running Locally
 1. Clone the repository:

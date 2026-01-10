@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import FoodCard from "./food/FoodCard";
+import FoodCard from "../food/FoodCard";
 import { useEffect, useState } from "react";
-import Loading from "../utils/Loading";
+import Loading from "../../utils/Loading";
 
 export default function FeaturedFood() {
     const [featuredFoods, setFeaturedFoods] = useState([]);
@@ -23,7 +23,7 @@ export default function FeaturedFood() {
     if (loading) return <Loading />;
     return (
         <article className="p-4 my-6 md:my-10">
-            <h2 className="text-3xl text-center font-bold mb-4">Featured Food</h2>
+            <h2 className="text-3xl text-center font-bold mb-4 md:mb-8">Featured <span className="text-primary">Foods</span></h2>
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {
                     featuredFoods.map(food => <FoodCard key={food._id} food={food} />)

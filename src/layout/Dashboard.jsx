@@ -6,6 +6,7 @@ import { MdFastfood } from "react-icons/md";
 import { BiSolidFoodMenu } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
 import ThemeToggler from "../utils/ThemeToggler";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
     const { currentUser } = useAuth();
@@ -64,6 +65,7 @@ export default function Dashboard() {
                     </ul>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }
