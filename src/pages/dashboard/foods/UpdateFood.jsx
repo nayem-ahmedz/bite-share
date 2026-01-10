@@ -1,29 +1,27 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 export default function UpdateFood() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useAuth();
     const [food, setFood] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
         async function fetchFood() {
             try {
-                const idToken = await currentUser.getIdToken();
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${id}`, {
-                    headers: {
-                        'Authorization': `Bearer ${idToken}`
-                    }
-                });
-                const data = await res.json();
-                setFood(data);
-                setLoading(false);
+                const res = await axiosSecure.get(`/api/food/${id}`);
+                if(res.data.status){
+                    setFood(res.data.food);
+                }
             } catch (err) {
                 console.error(err);
+            } finally {
                 setLoading(false);
             }
         }
@@ -36,7 +34,7 @@ export default function UpdateFood() {
         const updatedFood = {
             email: currentUser.email,
             foodName: form.foodName.value,
-            foodQuantity: form.foodQuantity.value,
+            foodQuantity: Number(form.foodQuantity.value),
             pickupLocation: form.pickupLocation.value,
             expireDate: form.expireDate.value,
             notes: form.notes.value,
@@ -44,29 +42,33 @@ export default function UpdateFood() {
             foodStatus: form.foodStatus.value,
         };
 
+        // Normalize for comparison
+        const isChanged = ['foodName', 'foodQuantity', 'pickupLocation', 'expireDate', 'notes', 'imageUrl', 'foodStatus'].some(key => {
+            let oldValue = '';
+            if (key === 'expireDate') {
+                oldValue = food[key] ? food[key].slice(0, 10) : '';
+            } else {
+                oldValue = (food[key] ?? '').toString();
+            }
+            const newValue = (updatedFood[key] ?? '').toString();
+            return newValue !== oldValue;
+        });
+
+        if (!isChanged) {
+            toast.info('No changes were made!');
+            return;
+        }
+
         try {
-            const idToken = await currentUser.getIdToken();
-            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${idToken}`
-                },
-                body: JSON.stringify(updatedFood),
-            });
-            const result = await res.json();
-            if (res.ok) {
-                if(result.modifiedCount){
-                    toast.success('Food updated successfully!');
-                    navigate("/my-foods");
-                } else{
-                    toast.warning('No change was made!');
-                }
+            const res = await axiosSecure.patch(`/api/food/${id}`, updatedFood);
+            if (res.data.success) {
+                toast.success('Food updated successfully!');
+                navigate("/dashboard/manage-foods");
             } else {
                 toast.error('Failed to update food.');
             }
         } catch (err) {
-            toast.warning('Unexpected error occurs');
+            toast.error('Unexpected error occurs');
         }
     }
 
@@ -105,7 +107,7 @@ export default function UpdateFood() {
                     <input
                         type="date"
                         name="expireDate"
-                        defaultValue={food.expireDate}
+                        defaultValue={food.expireDate.slice(0, 10)}
                         className="input input-bordered w-full"
                     />
                     <input

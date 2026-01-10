@@ -26,7 +26,6 @@ export default function ManageMyFoods() {
         fetchFoods();
     }, [currentUser]);
     const handleDelete = async (id) => {
-        const idToken = await currentUser.getIdToken();
         Swal.fire({
             title: "Are you sure to Delete",
             text: "this food?",
@@ -37,15 +36,9 @@ export default function ManageMyFoods() {
             confirmButtonText: "Yes, continue!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`${import.meta.env.VITE_BACKEND_URL}foods/${id}?email=${currentUser.email}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${idToken}`
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount) {
+                axiosSecure.delete(`/api/food/${id}?email=${currentUser.email}`)
+                    .then(res => {
+                        if (res.data.success) {
                             Swal.fire({
                                 title: "Deleted Food",
                                 text: "You have successfully deleted the food.",
@@ -83,10 +76,10 @@ export default function ManageMyFoods() {
                         <div className="flex w-full flex-col sm:flex-row gap-3">
                             <div className="grow space-y-3">
                                 <div className="text-xl">{food.foodName}</div>
-                                <div className="text-sm uppercase font-semibold opacity-60">Expire Date : {food.expireDate}</div>
+                                <div className="text-sm uppercase font-semibold opacity-60">Expire Date : {new Date(food.expireDate).toLocaleDateString()}</div>
                             </div>
                             <div className="flex gap-2">
-                                <Link to={`/update-food/${food._id}`} className="btn btn-sm md:btn-md">
+                                <Link to={`/dashboard/update-food/${food._id}`} className="btn btn-sm md:btn-md">
                                     <i className="fa-solid fa-pen-to-square"></i>
                                     Update
                                 </Link>

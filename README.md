@@ -52,14 +52,10 @@ Responsive for mobile, tablet, laptop and desktop PC
 - Google Fonts API : Inter font
 - React Router
 - FontAwsome Icons
-- React Toastify
-- SweetAlert 2
-- Motion
-
-## Project Timeline
-- created on 10 Nov 2025
-- completed on 13 Nov 2025
-- last updated on 10 Jan 2025
+- React Toastify (notification)
+- SweetAlert 2 (notification)
+- Motion (animation)
+- axios (API client)
 
 ## Installation / Running Locally
 1. Clone the repository:
@@ -74,7 +70,8 @@ Responsive for mobile, tablet, laptop and desktop PC
    ```bash
    npm install
    ```
-4. Start the development server:
+4. Ensure you have filled .env file (see .env.example)
+5. Start the development server:
    ```bash
    npm run dev
    ```
@@ -91,6 +88,11 @@ VITE_appId=your_firebase_keys
 VITE_BACKEND_URL=your_backend_url
 VITE_imagebbAPI=your_imagebb_api_key
 ```
+
+## Project Timeline
+- created on 10 Nov 2025
+- completed on 13 Nov 2025
+- last updated on 11 Jan 2025
 
 ## live link
 [BiteShare](https://bite-sharee.vercel.app/)

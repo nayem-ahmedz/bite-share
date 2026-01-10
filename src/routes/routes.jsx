@@ -20,6 +20,8 @@ const AddFood = lazy(() => import('../pages/dashboard/foods/AddFood'));
 const ManageFoods = lazy(() => import('../pages/dashboard/foods/ManageMyFoods'));
 const MyFoodRequest = lazy(() => import('../pages/dashboard/foods/MyFoodRequests'));
 const NoPageDashboards = lazy(() => import('../pages/dashboard/NoPage'));
+const Profile = lazy(() => import('../pages/dashboard/Profile'));
+const UpdateFood = lazy(() => import('../pages/dashboard/foods/UpdateFood'));
 
 export const router = createBrowserRouter([
     {
@@ -67,7 +69,9 @@ export const router = createBrowserRouter([
             { path: 'home', element: <DashboardHome /> },
             { path: 'add-food', element: <AddFood /> },
             { path: 'manage-foods', element: <ManageFoods /> },
+            { path: 'update-food/:id', element: <UpdateFood /> },
             { path: 'my-request', element: <MyFoodRequest /> },
+            { path: 'my-profile', element: <Profile /> },
             { path: '*', element: <NoPageDashboards /> }
         ]
     }
