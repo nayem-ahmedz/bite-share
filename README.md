@@ -8,27 +8,27 @@ Share your vite with others
 
 ## Features
 
-### 🔐 Authentication
+### Authentication
 - Secure user login using Email & Password
 - Google Sign-In support
 - Protected routes based on user authentication
 
-### 🍽️ Food Browsing
+### Food Browsing
 - Home page shows Top Available Foods sorted by quantity
 - View All available Foods
 - Detailed Food Information Page for every item
 
-### ➕ Add & Manage Foods
+### Add & Manage Foods
 - Users can add new food items
 - Users can update or delete foods they have posted
 - Check all foods added by the logged-in user
 
-### 📩 Food Requests
+### Food Requests
 - Users can request any available food item
 - Food owners can view incoming requests
 - Owners can approve or delete requests
 
-### 📱 Responsive & Smooth UI
+### Responsive & Smooth UI
 - Fully responsive for mobile, tablet, laptop, and desktop
 - Clean and modern UI
 - Smooth interactions + toast notifications
@@ -41,10 +41,10 @@ Share your vite with others
 - React Js
 
 ### Backend
-- Firebase Auth
 - Node JS
 - Express Js
 - MongoDb
+- Firebase Auth
 
 Responsive for mobile, tablet, laptop and desktop PC
 
@@ -76,25 +76,13 @@ Responsive for mobile, tablet, laptop and desktop PC
    npm run dev
    ```
 
-## setup env variables
-- Create a .env.local and paste
-```bash
-VITE_apiKey=your_firebase_keys
-VITE_authDomain=your_firebase_keys
-VITE_projectId=your_firebase_keys
-VITE_storageBucket=your_firebase_keys
-VITE_messagingSenderId=your_firebase_keys
-VITE_appId=your_firebase_keys
-VITE_BACKEND_URL=your_backend_url
-VITE_imagebbAPI=your_imagebb_api_key
-```
-
 ## Project Timeline
 - created on 10 Nov 2025
 - completed on 13 Nov 2025
-- last updated on 11 Jan 2025
+- last updated on 30 Jan 2025
 
 ## live link
-[BiteShare](https://bite-sharee.vercel.app/)
+[BiteShare](https://bite-sharee.vercel.app)
+[Server repo](https://github.com/nayem-ahmedz/bite-share-server)
 
-Feel free to contact for any query!
+Feel free to contact for any query! Liked it? give a star

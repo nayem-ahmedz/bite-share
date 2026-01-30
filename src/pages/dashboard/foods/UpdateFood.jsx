@@ -77,6 +77,7 @@ export default function UpdateFood() {
 
     return (
         <section className="max-w-3xl mx-auto p-6 bg-base-100 rounded-box shadow">
+            <title>Update Food - Dashboard | Bite Share</title>
             <h2 className="text-2xl font-semibold mb-4 text-center">Update Food</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>

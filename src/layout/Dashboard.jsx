@@ -19,6 +19,7 @@ export default function Dashboard() {
     ];
     return (
         <div className="drawer lg:drawer-open">
+            <title>Dashboard | Bite Share</title>
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Navbar */}
