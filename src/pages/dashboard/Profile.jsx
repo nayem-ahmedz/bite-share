@@ -27,7 +27,7 @@ export default function Profile() {
     }, []);
     return (
         <section className="hero bg-base-200 min-h-screen">
-            <title>My Profile | Dashboard</title>
+            <title>My Profile - Dashboard | Bite Share</title>
             {
                 loading ? <span className="loading loading-spinner loading-lg"></span> : <div className="hero-content flex-col lg:flex-row gap-8">
                     <div>

@@ -66,6 +66,7 @@ export default function ManageMyFoods() {
     if(loading) return <Loading />
     return (
         <section className="p-4">
+            <title>Manage Foods - Dashboard | Bite Share</title>
             <ul className="list bg-base-100 rounded-box shadow-md max-w-4xl mx-auto my-10">
                 <li className="p-4 pb-2 text-2xl opacity-60 tracking-wide">My foods</li>
                 {

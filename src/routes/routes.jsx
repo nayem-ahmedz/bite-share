@@ -48,9 +48,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/available-foods',
-                loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/api/food`),
-                element: <AvailableFoods />,
-                errorElement: <ErrorPage />
+                element: <AvailableFoods />
             },
             {
                 path: '/foods/:id',

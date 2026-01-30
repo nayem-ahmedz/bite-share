@@ -83,6 +83,7 @@ export default function AddFood() {
     }
     return (
         <section>
+            <title>Add Food - Dashboard | Bite Share</title>
             <h2 className="text-2xl md:text-3xl font-bold text-center mt-4">Add Food</h2>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl my-10 mx-auto">
                 <div className="card-body">
