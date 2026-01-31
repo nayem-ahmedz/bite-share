@@ -14,9 +14,9 @@ export default function useAxiosSecure() {
     useEffect(() => {
         // request interceptor
         const reqInterceptor = axiosSecure.interceptors.request.use(async (config) => {
-            if (!config.headers.Authorization && currentUser) {
+            if (!config.headers.authorization && currentUser) {
                 const idToken = await currentUser.getIdToken();
-                config.headers.Authorization = `Bearer ${idToken}`;
+                config.headers.authorization = `Bearer ${idToken}`;
             }
             return config;
         }, (error) => {

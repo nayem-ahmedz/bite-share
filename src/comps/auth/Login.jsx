@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "motion/react";
 import GoogleLogin from "./GoogleLogin";
 import useAuth from "../../hooks/useAuth";
+import Loading from '../../utils/Loading';
 
 export default function Login() {
     const [error, setError] = useState('');
-    const { loginUser } = useAuth();
+    const { loginUser, currentUser, loading } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const destiny = location.state || '/';
@@ -35,6 +36,8 @@ export default function Login() {
                 }
             });
     }
+    if(loading) return <Loading />
+    if(currentUser) return <Navigate to='/dashboard' replace />
     return (
         <motion.section
             className="flex justify-center w-full px-6"

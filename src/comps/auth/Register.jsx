@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "motion/react";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "./GoogleLogin";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../utils/Loading";
+import useAxios from "../../hooks/useAxios";
 
 export default function Register() {
     const [error, setError] = useState('');
-    const [ loading, setLoading ] = useState(false);
-    const { createUser, updateUserProfile } = useAuth();
+    const [loading, setLoading] = useState(false);
+    const [justRegister, setJustRegister] = useState(false);
+    const { createUser, updateUserProfile, currentUser, loading: userLoading } = useAuth();
     const navigate = useNavigate();
-    const axiosSecure = useAxiosSecure();
-    function handleSubmit(e) {
+    const axios = useAxios();
+    async function handleSubmit(e) {
         setLoading(true);
         e.preventDefault();
         setError('');
@@ -22,14 +24,17 @@ export default function Register() {
         const password = e.target.password.value.trim();
         if (password.length < 6) {
             setError('Password must be at least 6 characters');
+            setLoading(false);
             return;
         }
         if (!/[A-Z]/.test(password)) {
             setError('Password needs an uppercase letter');
+            setLoading(false);
             return;
         }
         if (!/[a-z]/.test(password)) {
             setError('Password needs a lowercase letter');
+            setLoading(false);
             return;
         }
         // user info to send to DB
@@ -37,34 +42,35 @@ export default function Register() {
             name: displayName, email, photoURL
         };
         // creating a new user using email and password
-        createUser(email, password)
-            .then(userCredential => {
-                e.target.reset();
-                updateUserProfile(userCredential.user, { displayName, photoURL })
-                    .then(() => {
-                        axiosSecure.post('/api/user', userData)
-                          .then(res => {
-                            console.log(res);
-                            toast.success('Account created Succesfully!');
-                            navigate('/');
-                          });
-                    })
-                    .catch(error => {
-                        setError(error.message)
-                    })
-                    .finally(() => {
-                        setLoading(false);
-                    });
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    setError('Account already exist with this email')
-                } else {
-                    setError(error.code);
+        try {
+            const userCredential = await createUser(email, password);
+            const user = userCredential.user;
+            setJustRegister(true); // flag to avoid redirect to dashboard upon register, from line 72
+            await updateUserProfile(user, { displayName, photoURL });
+
+            // attaching firebase toekn
+            const idToken = await user.getIdToken();
+            await axios.post('/api/user', userData, {
+                headers: {
+                    Authorization: `Bearer ${idToken}`
                 }
-                setLoading(false);
             });
+            e.target.reset();
+            toast.success('Account created successfully!');
+            navigate('/');
+        } catch (err) {
+            console.error(err);
+            if (err.code === 'auth/email-already-in-use') {
+                setError('Account already exists with this email');
+            } else {
+                setError(err.message || err.code);
+            }
+        } finally {
+            setLoading(false);
+        }
     }
+    if (userLoading) return <Loading />
+    if (currentUser && !justRegister) return <Navigate to='/dashboard' replace />
     return (
         <section className="flex justify-center w-full px-6">
             <title>Register | BiteShare</title>
